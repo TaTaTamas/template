@@ -1,0 +1,32 @@
+networks:
+  services:
+
+volumes:
+  pgdata:
+
+services:
+  parking-service:
+    image: tatatamas/parking-service:latest
+    container_name: parking-service
+    ports:
+      - "8083:8083"
+
+  postgres:
+    image: postgres:14.20-alpine
+    user: postgres
+    restart: unless-stopped
+    networks:
+      - services
+    environment:
+      POSTGRES_USER: <CHANGE_ME>
+      POSTGRES_PASSWORD: <CHANGE_ME>
+      POSTGRES_DB: <CHANGE_ME>
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgressql/data

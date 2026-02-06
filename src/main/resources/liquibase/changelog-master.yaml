@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: migrations/00_init.sql
+      relativeToChangelogFile: true
+  - include:
+      file: migrations/01_testusers.sql
+      relativeToChangelogFile: true
+  - include:
+      file: migrations/02_testvehicles.sql
+      relativeToChangelogFile: true

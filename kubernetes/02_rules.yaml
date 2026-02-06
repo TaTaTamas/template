@@ -1,0 +1,23 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  annotations:
+    gateway.kyma-project.io/original-version: v2
+  finalizers:
+    - gateway.kyma-project.io/subresources
+  labels:
+    app.kubernetes.io/name: apirule-parking
+  name: apirule-parking
+  namespace: default
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts:
+    - '8083'
+  rules:
+    - methods:
+        - GET
+      noAuth: true
+      path: /parking/locations
+  service:
+    name: service-parkingapp
+    port: 8083

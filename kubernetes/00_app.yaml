@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-app-parking
+spec:
+  template:
+    metadata:
+      labels:
+        apptemplate: template-parkingapp
+    spec:
+      containers:
+        - image: tatatamas/parking-service
+          name: parking-service
+          ports:
+            - name: http
+              containerPort: 8083
+  selector:
+    matchLabels:
+      apptemplate: template-parkingapp
